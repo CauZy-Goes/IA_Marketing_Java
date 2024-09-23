@@ -35,21 +35,32 @@ public class Estado extends AbstractState {
 	//valor de investimento padrao
 	public static final int INVESTIMENTO_PADRAO = 100;
 	
-	private int AREA_ATUAL;
-	private int NIVEL_RETORNO;
-	private int INVESTIMENTO_TOTAL;
-	private int total_retorno;
-	private int numero_investimentos;
-	private int orcamento_disponivel;
+	private int areaAtual;
+	private int nivelRetornoTv = 0;
+	private int nivelRetornoRedesSociais = 0;
+	private int investimentoTv = 0;
+	private int investimentoRedesSociais = 0;
+	private int totalRetornoTv = 0;
+	private int totalRetornoRedesSociais = 0;
+	private int orcamentoDisponivel;
 
 	 public Estado(){
 	 }
-	 
-	 public Estado(int salaAtual,int salaDireita, int salaEsquerda){
-		 this.salaAtual = salaAtual;
-		 this.salaDireita = salaDireita;
-		 this.salaEsquerda = salaEsquerda;
+
+	  public Estado(int areaAtual, int orcamentoDisponivel){
+		 this.areaAtual = areaAtual;
+		 this.orcamentoDisponivel = orcamentoDisponivel;
 	 }
+	 
+	//  public Estado(int areaAtual, int nivelRetorno, int investimentoTotal, int totalRetorno, 
+	//  int numeroInvestimentos, int orcamentoDisponivel){
+	// 	 this.areaAtual = areaAtual;
+	// 	 this.nivelRetorno = nivelRetorno;
+	// 	 this.investimentoTotal = investimentoTotal;
+	// 	 this.totalRetorno = totalRetorno;
+	// 	 this.numeroInvestimentos = numeroInvestimentos;
+	// 	 this.orcamentoDisponivel = orcamentoDisponivel;
+	//  }
 	
     /**
     * Metodo necessario para criar copias do Estado.
@@ -72,62 +83,135 @@ public class Estado extends AbstractState {
 	public boolean equals(Object arg0) {
         Estado outro = (Estado) arg0;
         boolean igual = false;
-        if(this.getSalaDireita() == outro.getSalaDireita() &&
-        	this.getSalaEsquerda() == outro.getSalaEsquerda() &&
-        	this.getSalaAtual() == outro.getSalaAtual()) {
+        if(this.getAreaAtual() == outro.getAreaAtual() &&
+        	this.getOrcamentoDisponivel() == outro.getOrcamentoDisponivel() &&
+        	this.getInvestimentoRedesSociais() == outro.getInvestimentoRedesSociais() &&
+        	this.getInvestimentoTv() == outro.getInvestimentoTv()) {
             igual = true;
         }
         return igual;
 	}
 
 	/**
-	 * Obtem a sala atual do aspirador (DIREITA ou ESQUERDA). 
-	 * @return int - Sala Atual
+	 * Obtem a area atual 
+	 * @return int - area atual
 	 */
-	public int getSalaAtual() {
-		return salaAtual;
+	public int getAreaAtual() {
+		return areaAtual;
 	}
 
 	/**
-	 * Atribui a sala atual do aspirador (DIREITA ou ESQUERDA). 
-	 * @param salaAtual
+	 * Atribui a area
+	 * @param areaAtual
 	 */
-	public void setSalaAtual(int salaAtual) {
-		this.salaAtual = salaAtual;
+	public void setAreaAtual(int areaAtual) {
+		this.areaAtual = areaAtual;
 	}
 
 	/**
-	 * Obtem o estado da sala direita (SUJA ou LIMPA)
-	 * @return int - Estado da Sala
+	 * 
+	 * @return int - retorna o nivel de retorno da area redes sociais
 	 */
-	public int getSalaDireita() {
-		return salaDireita;
+	public int getNivelRetornoRedesSociais() {
+		return nivelRetornoRedesSociais;
 	}
 
 	/**
-	 * Atribui o estado da sala direita (SUJA ou LIMPA) 
-	 * @param salaDireita
+	 * Atribui o nivel de retorno da area redes sociais
+	 * @param nivelRetorno
 	 */
-	public void setSalaDireita(int salaDireita) {
-		this.salaDireita = salaDireita;
+	public void setNivelRetornoRedesSociais(int nivelRetornoRedesSociais) {
+		this.nivelRetornoRedesSociais = nivelRetornoRedesSociais;
 	}
 
 	/**
-	 * Obtem o estado da sala esquerda (SUJA ou LIMPA)
-	 * @return int - Estado da Sala
+	 * 
+	 * @return int - retorna o nivel de retorno da area tv
 	 */
-	public int getSalaEsquerda() {
-		return salaEsquerda;
+	public int getNivelRetornoTv() {
+		return nivelRetornoTv;
 	}
 
 	/**
-	 * Atribui o estado da sala esquerda (SUJA ou LIMPA) 
-	 * @param salaEsquerda
+	 * Atribui o nivel de retorno da area tv
+	 * @param nivelRetorno
 	 */
-	public void setSalaEsquerda(int salaEsquerda) {
-		this.salaEsquerda = salaEsquerda;
+	public void setNivelRetornoTv(int nivelRetornoTv) {
+		this.nivelRetornoTv = nivelRetornoTv;
 	}
-	
+
+	/**
+	 * 
+	 * @return int - retorna o investimento na area tv
+	 */
+	public int getInvestimentoTv() {
+		return investimentoTv;
+	}
+
+	/**
+	 * Atribui o nivel de retorno da area de tv
+	 * @param nivelRetorno
+	 */
+	public void setInvestimentoTv(int investimentoTv) {
+		this.investimentoTv = investimentoTv;
+	}
+
+	/**
+	 * 
+	 * @return int - retorna o investimento na area redes sociais
+	 */
+	public int getInvestimentoRedesSociais() {
+		return investimentoRedesSociais;
+	}
+
+	/**
+	 * Atribui o nivel de retorno da area de redes sociais
+	 * @param nivelRetorno
+	 */
+	public void setInvestimentoRedesSociais(int investimentoRedesSociais) {
+		this.investimentoRedesSociais = investimentoRedesSociais;
+	}
+
+	/**
+	 * 
+	 * @return int - retorna o retorno total da area tv
+	 */
+	public int getTotalRetornoTv() {
+		return totalRetornoTv;
+	}
+
+	/**
+	 * Atribui retorno da area de tv
+	 * @param nivelRetorno
+	 */
+	public void setTotalRetornoTv(int totalRetornoTv) {
+		this.totalRetornoTv = totalRetornoTv;
+	}
+
+	/**
+	 * 
+	 * @return int - retorna o retorno total da area redes sociais
+	 */
+	public int getTotalRetornoRedesSociais() {
+		return totalRetornoRedesSociais;
+	}
+
+	/**
+	 * Atribui retorno da area de redes sociais
+	 * @param nivelRetorno
+	 */
+	public void setTotalRetornoRedesSociais(int totalRetornoRedesSociais) {
+		this.totalRetornoRedesSociais = totalRetornoRedesSociais;
+	}
+
+	/**
+	 * 
+	 * @return int - orcamento disponivel
+	 */
+	public int getOrcamentoDisponivel() {
+		return orcamentoDisponivel;
+	}
+
 
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
